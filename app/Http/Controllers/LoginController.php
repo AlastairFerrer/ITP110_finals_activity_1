@@ -15,9 +15,16 @@ class LoginController
             $model = User::where('email', $request->email)->first();
 
             if($model && Hash::check( $request->password, $model->password)){
+
+                session()->forget('status', 'error');
                 session(['user_id' => $model->id]);
+
                 return response()->json(['status'=> 200 ,'message' => 'Successfully logged in!' ], 200);
+                
             } else {
+
+                session(['status' => 401 , 'error' => 'Unauthenticated!']);
+
                 return response()->json(['message' => 'Unauthenticated!'], 401);
             }
         }catch(\Throwable $th){

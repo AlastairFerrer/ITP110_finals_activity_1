@@ -19,5 +19,6 @@ Route::get('/show-register', [LoginController::class, 'showRegister']);
 Route::post('/register', [LoginController::class, 'register']);
 
 Route::get('/blob', [BlobPostController::class, 'showMainPage']);
+Route::post('/blob/post', [BlobPostController::class, 'createBlob']);
 
 

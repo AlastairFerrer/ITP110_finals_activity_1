@@ -36,8 +36,34 @@
 
     <div class="container mt-4">
         @if($isLoggedIn)
+    
+        @foreach($posts as $post)
+        <div class="container mt-4">
+            <div class='row'>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $post->title }}</h5>
+                            <p class="card-text">{{ Str::limit($post->content, 150) }}</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Posted by User ID: {{ $post->user_id }}
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            @endforeach
+
             <h2>Create a New Post</h2>
-                <form action="/posts" method="POST">
+
+                @if(session('status') === 200)
+                    <div class='alert alert-success'>
+                        {{ session('message') }}
+                    </div>
+                @endif
+
+                <form action="/blob/post" id='form-createBlob' method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Title:</label>

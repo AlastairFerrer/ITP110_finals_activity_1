@@ -23,6 +23,15 @@
         <div class="card" style="width: 100%; max-width: 400px;">
             <div class="card-body">
                 <h5 class="card-title text-center mb-4">Login</h5>
+
+                @if(session('status') === 401)
+                    <div class='alert alert-danger text-center border'> 
+                        {{ session('error') }}
+                    </div> 
+
+                @else 
+
+                @endif
                 <form id="form-login" action='/login'>
                     @csrf
                     <div class="mb-3">

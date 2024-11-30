@@ -11,11 +11,12 @@ $(document).ready(function () {
             url:"/login",
             method: "POST",
             data: { _token, email, password },
-            error: function(res){
-                alert(res.responseJSON.message)
+            error: function(){
+                window.location.reload()
             },
             success: function(res){
                 alert(res.message)
+                $('#success').html(res.message)
                 if(res.status === 200){
                     window.location.href = '/blob'
                 }
@@ -70,6 +71,24 @@ $(document).ready(function () {
         $("#password_confirmation").val("")
     })
 
+    $('#form-createBlob').on('submit', function(e){
+        e.preventDefault()
 
-    // $()
+        const _token = $("meta[name ='csrf-token']").attr('content')
+        const title = $('#title').val()
+        const content = $('#content').val()
+
+        $.post({
+            url:'/blob/post',
+            data: { _token, title, content },
+            success: function(){
+                window.location.reload()
+            },
+            error: function(res){
+                console.log(res)
+                alert(res.error)
+            }
+        })
+    })
+
 });
