@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Models\BlogPosts;
 
-class BlobPostController
+class BlobController
 {
     public function showMainPage(){
 
@@ -20,11 +20,13 @@ class BlobPostController
     public function createBlob(Request $request){
         try{
             $validator = Validator::make($request->all(), [
-                'title' => 'required',
-                'content' => 'required|string',
+                'title' => 'required|min:10',
+                'content' => 'required|string|min:10',
             ]);
 
             if($validator->fails()){
+                session(['status' => 422]);
+
                 return response()->json(['error' => $validator->messages()], 422);
             }
             

@@ -51,34 +51,52 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        @endforeach
+
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">Create New Post</button>
+        </div>
+
+        <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createPostModalLabel">Create New Post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if(session('status') === 200)
+                            <div class='alert alert-success'>
+                                {{ session('message') }}
+                            </div>
+                        @elseif(session('status') === 422) 
+                            <div class='alert alert-danger' id="error-create-blog">
+                            </div>   
+                        @endif
+
+                        <form action="/blob/post" id='form-createBlob' method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title:</label>
+                                <input type="text" name="title" id="title" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="content" class="form-label">Content:</label>
+                                <textarea name="content" id="content" class="form-control" rows="5" required></textarea>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-success">Create Post</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            @endforeach
+        </div>
 
-            <h2>Create a New Post</h2>
-
-                @if(session('status') === 200)
-                    <div class='alert alert-success'>
-                        {{ session('message') }}
-                    </div>
-                @endif
-
-                <form action="/blob/post" id='form-createBlob' method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title:</label>
-                        <input type="text" name="title" id="title" class="form-control" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="content" class="form-label">Content:</label>
-                        <textarea name="content" id="content" class="form-control" rows="5" required></textarea>
-                    </div>
-
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-success">Create Post</button>
-                    </div>
-                </form>
         @endif
     </div>
 

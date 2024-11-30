@@ -15,9 +15,9 @@ $(document).ready(function () {
                 window.location.reload()
             },
             success: function(res){
-                alert(res.message)
                 $('#success').html(res.message)
                 if(res.status === 200){
+                    alert(res.message)
                     window.location.href = '/blob'
                 }
             }
@@ -58,10 +58,10 @@ $(document).ready(function () {
             method: "POST",
             data: { _token, name, email, password },
             success: function(res){
-                alert(Object.values(res.responseJSON))
+                alert(Object.values(res.responseJSON.message))
             },
             error: function(res){
-                alert(Object.values(res.responseJSON))
+                alert(Object.values(res.responseJSON.error))
             }
         })
 
@@ -85,8 +85,7 @@ $(document).ready(function () {
                 window.location.reload()
             },
             error: function(res){
-                console.log(res)
-                alert(res.error)
+               $('#error-create-blog').html(Object.values(res.responseJSON.error))
             }
         })
     })

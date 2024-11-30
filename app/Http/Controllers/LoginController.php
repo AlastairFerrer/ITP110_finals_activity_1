@@ -23,9 +23,8 @@ class LoginController
                 
             } else {
 
-                session(['status' => 401 , 'error' => 'Unauthenticated!']);
+                session(['status' => 401 , 'error' => 'Incorrect credentials!']);
 
-                return response()->json(['message' => 'Unauthenticated!'], 401);
             }
         }catch(\Throwable $th){
             return response()->json(['error' => $th->getMessage()], 500);

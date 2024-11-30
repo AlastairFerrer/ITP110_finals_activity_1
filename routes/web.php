@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\BlobPostController;
+use App\Http\Controllers\BlobController;
 
 Route::get('/', function () {
     return view('login');
@@ -18,7 +18,7 @@ Route::post('/logout',[LoginController::class, 'logout']);
 Route::get('/show-register', [LoginController::class, 'showRegister']);
 Route::post('/register', [LoginController::class, 'register']);
 
-Route::get('/blob', [BlobPostController::class, 'showMainPage']);
-Route::post('/blob/post', [BlobPostController::class, 'createBlob']);
+Route::get('/blob', [BlobController::class, 'showMainPage']);
+Route::post('/blob/post', [BlobController::class, 'createBlob']);
 
 
